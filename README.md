@@ -4,7 +4,9 @@ This tool uses drist to run the build on a remote build server and copy the imag
 
 ---
 
-**rpi4** - minimal image  
+**rpi4-upstream** - default official image
+
+**rpi4-minmal** - minimal image  
 deviates only slightly from the default void-linux image in that:  
 - sudo is replaced with doas  
 - dhcpcd, chronyd, and sshd enabled on boot  
@@ -13,7 +15,7 @@ deviates only slightly from the default void-linux image in that:
 
 ---
 
-**rpi4-lxd** - lxd appliance  
+**rpi4-lxd** - lxd appliance (cluster node)
 deviates from the default void-linux image in that:
 - sudo is replaced with doas
 - LXD and ZFS are installed
