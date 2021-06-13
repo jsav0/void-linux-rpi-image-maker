@@ -22,7 +22,7 @@ deviates from the default void-linux image in that:
 - dhcpcd, chronyd, sshd and lxd enabled on boot
 - new user is added: 'void' and joined to group: 'lxd'
 - passwords are disabled for 'void' and 'root'
-- ssh login is permitted for both users by way of placing your pubkey in files/ssh_keys/ before running make.
+- ssh login is permitted for both users by way of creating and placing your pubkey in ssh_keys/ before running make.
 - hostname is set to the raspberry pi's serial number
 
 
