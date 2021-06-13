@@ -35,7 +35,7 @@ build_platformfs(){
 	  -r https://alpha.de.repo.voidlinux.org/current/musl \
 	  -r https://alpha.de.repo.voidlinux.org/current/aarch64 \
 	  -x 2 \
-	  -p 'rpi4-kernel-headers opendoas lxd' \
+	  -p 'rpi4-kernel-headers opendoas lxd zfs' \
 	  -k '../post-script.sh' \
 	  rpi4-musl void-aarch64-musl-ROOTFS-`date "+%Y%m%d"`.tar.xz
 }
