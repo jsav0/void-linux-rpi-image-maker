@@ -17,7 +17,8 @@ install_depends(){
 
 build_image(){
 	# Build the rootfs, platformfs and image all in one shot:
-	make $( (make rootfs-all-print ; make images-all-sbc-print ) | grep -e aarch64-musl -e rpi4-musl)
+	cd void-mklive && \
+		make $( (make rootfs-all-print ; make images-all-sbc-print ) | grep -e aarch64-musl -e rpi4-musl)
 }
 
 save_image(){
