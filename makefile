@@ -6,8 +6,6 @@ RPI4_LXD_DIR		= rpi4-lxd-appliance
 
 SSH_KEYS := $(shell ls ssh_keys/*.pub 2>/dev/null)
 
-default: usage
-
 usage: 
 	@echo "RPi Void Linux image maker by wfnintr"
 	@echo "-------------------------------------"
