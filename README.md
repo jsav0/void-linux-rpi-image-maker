@@ -36,6 +36,9 @@ and copy the image back to the local client
 Tell make what build server to use like so:
   echo "SERVER=void@build-server" > config.mk
 
+Or just specify the build server on the command line like so:
+  make <target> SERVER=void@build-server
+
 Usage:
   make <target>
 
@@ -47,5 +50,5 @@ Examples:
   make rpi4-minimal	# rpi4 minimal image
   make rpi4-lxd		# rpi4 LXD appliance image
 
-Note: SSH keys inside of ./ssh_keys will be embedded into images
+Note: SSH keys inside of ./ssh_keys will be embedded into images when applicable
 ```

@@ -17,6 +17,9 @@ usage:
 	@echo "Tell make what build server to use like so: "
 	@echo "  echo \"SERVER=void@build-server\" > config.mk"
 	@echo ""
+	@echo "Or just specify the build server on the command line like so: "
+	@echo "  make <target> SERVER=void@build-server"
+	@echo ""
 	@echo "Usage:"
 	@echo "  make <target>"
 	@echo ""
@@ -28,7 +31,7 @@ usage:
 	@echo "  make rpi4-minimal	# rpi4 minimal image"
 	@echo "  make rpi4-lxd		# rpi4 LXD appliance image"
 	@echo ""	
-	@echo "Note: SSH keys inside of ./ssh_keys will be embedded into images"
+	@echo "Note: SSH keys inside of ./ssh_keys will be embedded into images when applicable"
 
 rpi4-upstream: 
 	cd $(RPI4_UPSTREAM_DIR) && drist -p -s $(SERVER)
