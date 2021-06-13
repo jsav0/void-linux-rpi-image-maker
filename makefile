@@ -40,6 +40,7 @@ rpi4-lxd:
 	-rm -rf $(RPI4_LXD_DIR)/files/ssh_keys/
 
 clean: 
-	-rm -rf ssh_keys results config.mk
+	find . -type d -name 'ssh_keys' | xargs rm -rf
+	-rm -rf results config.mk 
 
 .PHONY: rpi4-upstream rpi4-minimal rpi4-lxd
