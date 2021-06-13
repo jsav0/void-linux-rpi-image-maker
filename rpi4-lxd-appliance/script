@@ -1,0 +1,52 @@
+#!/bin/sh
+#n0
+# File: script (drist playbook)
+# Description: build and configure a void linux LXD appliance (cluster node) image for the rpi4
+# Author: wfnintr
+# Date: 2021-06-11
+#a110w
+
+install_depends(){
+	# Install the dependencies, clone the void-mklive directory
+	xbps-install -Syu xbps && {
+		xbps-install -Syu
+		xbps-install -y bash git xtools xz qemu-user-static && \
+			git clone https://github.com/void-linux/void-mklive
+		}
+}
+
+build_rootfs(){
+	# Build a base rootfs (aarch64-musl) 
+	cd void-mklive && \
+		make void-aarch64-musl-ROOTFS-`date "+%Y%m%d"`.tar.xz
+}
+
+build_platformfs(){
+	# Build the platform-specifc rootfs from the base root filesystem plus a few changes:
+	# - sudo is replaced with doas
+	# - LXD and ZFS are installed
+	# - dhcpcd, chronyd, sshd and lxd enabled on boot
+	# - new user is added: 'void' and joined to group: 'lxd'
+	# - passwords are disabled for 'void' and 'root'
+	# - ssh login is permitted for both users by way of placing your pubkey in files/ssh_keys/ before running make.
+	# - hostname is set to the raspberry pi's serial number
+	./mkplatformfs.sh \
+	  -r https://alpha.de.repo.voidlinux.org/current \
+	  -r https://alpha.de.repo.voidlinux.org/current/musl \
+	  -r https://alpha.de.repo.voidlinux.org/current/aarch64 \
+	  -x 2 \
+	  -p 'rpi4-kernel-headers opendoas lxd' \
+	  -k '../post-script.sh' \
+	  rpi4-musl void-aarch64-musl-ROOTFS-`date "+%Y%m%d"`.tar.xz
+}
+
+save_platformfs(){
+	# save the resulting platformfs to /tmp/results
+	# with my modified version of drist, everything in /tmp/results/ is copied back to the client
+	mkdir -p /tmp/results
+	cp void-rpi4-musl-PLATFORMFS-`date "+%Y%m%d"`.tar.xz /tmp/results/void-rpi4-musl-PLATFORMFS-lxd-appliance-`date "+%Y%m%d"`.tar.xz
+}
+
+install_depends || exit 1
+build_rootfs && build_platformfs
+save_platformfs
