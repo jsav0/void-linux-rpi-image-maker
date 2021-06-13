@@ -28,15 +28,24 @@ deviates from the default void-linux image in that:
 
 ## Makefile Usage
 ```
+RPi Void Linux image maker by wfnintr
+-------------------------------------
+This tool uses drist to run the build on a remote server
+and copy the image back to the local client
+
+Tell make what build server to use like so:
+  echo "SERVER=void@build-server" > config.mk
+
 Usage:
   make <target>
 
 Targets:
-  - rpi3, rpi4, rpi3-lxd, rpi4-lxd
+  - rpi4-upstream, rpi4-minimal, rpi4-lxd
 
 Examples:
-  make rpi3      # rpi3 minimal image
-  make rpi4      # rpi4 minimal image
-  make rpi3-lxd  # rpi3 LXD appliance image
-  make rpi4-lxd  # rpi4 LXD appliance image
-  ```
+  make rpi4-upstream	# rpi4 official upstream image
+  make rpi4-minimal	# rpi4 minimal image
+  make rpi4-lxd		# rpi4 LXD appliance image
+
+Note: SSH keys inside of ./ssh_keys will be embedded into images
+```
