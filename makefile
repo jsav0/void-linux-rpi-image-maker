@@ -1,5 +1,7 @@
 -include config.mk
 
+RPI3_UPSTREAM_DIR	= rpi3-upstream
+
 RPI4_UPSTREAM_DIR	= rpi4-upstream
 RPI4_MINIMAL_DIR	= rpi4-minimal
 RPI4_LXD_DIR		= rpi4-lxd-appliance
@@ -31,12 +33,15 @@ usage:
 	@echo ""	
 	@echo "Note: SSH keys inside of ./ssh_keys will be embedded into images when applicable"
 
+rpi3-upstream: 
+	cd $(RPI3_UPSTREAM_DIR) && drist -p -s $(SERVER)
+
 rpi4-upstream: 
 	cd $(RPI4_UPSTREAM_DIR) && drist -p -s $(SERVER)
 rpi4-minimal: 
 	cd $(RPI4_MINIMAL_DIR) && drist -p -s $(SERVER)
 rpi4-lxd: 
-	-cp $(SSH_KEYS) $(RPI4_LXD_DIR)/files/ssh_keys/
+	mkdir -p $(RPI4_LXD_DIR)/files/ssh_keys && cp $(SSH_KEYS) $(RPI4_LXD_DIR)/files/ssh_keys/
 	cd $(RPI4_LXD_DIR) && drist -p -s $(SERVER)
 	-rm -rf $(RPI4_LXD_DIR)/files/ssh_keys/
 
@@ -44,4 +49,4 @@ clean:
 	find . -type d -name 'ssh_keys' | xargs rm -rf
 	-rm -rf results config.mk 
 
-.PHONY: rpi4-upstream rpi4-minimal rpi4-lxd
+.PHONY: rpi3-upstream rpi4-upstream rpi4-minimal rpi4-lxd
