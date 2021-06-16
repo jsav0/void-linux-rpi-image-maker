@@ -1,6 +1,7 @@
 -include config.mk
 
 RPI3_UPSTREAM_DIR	= rpi3-upstream
+RPI3_LXD_DIR		= rpi3-lxd-appliance
 
 RPI4_UPSTREAM_DIR	= rpi4-upstream
 RPI4_MINIMAL_DIR	= rpi4-minimal
@@ -35,6 +36,10 @@ usage:
 
 rpi3-upstream: 
 	cd $(RPI3_UPSTREAM_DIR) && drist -p -s $(SERVER)
+rpi3-lxd: 
+	mkdir -p $(RPI3_LXD_DIR)/files/ssh_keys && cp $(SSH_KEYS) $(RPI3_LXD_DIR)/files/ssh_keys/
+	cd $(RPI3_LXD_DIR) && drist -p -s $(SERVER)
+	-rm -rf $(RPI3_LXD_DIR)/files/ssh_keys/
 
 rpi4-upstream: 
 	cd $(RPI4_UPSTREAM_DIR) && drist -p -s $(SERVER)
