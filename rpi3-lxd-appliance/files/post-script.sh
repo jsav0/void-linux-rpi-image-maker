@@ -35,5 +35,5 @@ cat ../ssh_keys/*.pub > "$1/root/.ssh/authorized_keys"
 
 # Set hostname to the pi's serial number
 cat >> "$1/etc/runit/core-services/005-hostname.sh" << EOF
-sed 's/^10*//' /sys/firmware/devicetree/base/serial-number > /etc/hostname
+sed 's/^0*//' /sys/firmware/devicetree/base/serial-number > /etc/hostname
 EOF
