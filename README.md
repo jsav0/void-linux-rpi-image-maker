@@ -8,6 +8,18 @@ This tool uses my modified version of [drist]() to run the build on a remote bui
 
 ---
 
+**rpi3-lxd** - lxd appliance (cluster node)
+deviates from the default void-linux image in that:
+- sudo is replaced with doas
+- LXD and ZFS are installed
+- dhcpcd, chronyd, sshd and lxd enabled on boot
+- new user is added: 'void' and joined to group: 'lxd'
+- passwords are disabled for 'void' and 'root'
+- ssh login is permitted for both users by way of creating and placing your pubkey in ssh_keys/ before running make.
+- hostname is set to the raspberry pi's serial number
+
+---
+
 **rpi4-upstream** - default official image
 
 ---
