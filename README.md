@@ -1,10 +1,16 @@
 # RPi Void Linux image maker by wfnintr
-a script to automate the building of custom void linux images catered to the Raspberry Pi  
-This tool uses drist to run the build on a remote build server and copy the image back to the local client
+a script to automate the building of custom void linux images for the Raspberry Pi  
+This tool uses my modified version of [drist]() to run the build on a remote build server and copy the image back to the local client.
+
+---
+
+**rpi3-upstream** - default official image
 
 ---
 
 **rpi4-upstream** - default official image
+
+---
 
 **rpi4-minmal** - minimal image  
 deviates only slightly from the default void-linux image in that:  
