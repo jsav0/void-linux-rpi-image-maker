@@ -52,21 +52,23 @@ This tool uses drist to run the build on a remote server
 and copy the image back to the local client
 
 Tell make what build server to use like so:
-  echo "SERVER=void@build-server" > config.mk
+  echo "SERVER=user@build-server" > config.mk
 
-Or just specify the build server on the command line like so:
-  make <target> SERVER=void@build-server
+Or just specify the build server on the command line:
+  make <target> SERVER=user@build-server
+
+The same goes for embedding ssh keys into images:
+  make <target> SERVER=user@build-server SSH_KEY=~.ssh/id_ed25519.pub
 
 Usage:
-  make <target>
+  make <target> <SERVER> [SSH_KEY]
 
 Targets:
+  - rpi3-upstream, rpi3-lxd
   - rpi4-upstream, rpi4-minimal, rpi4-lxd
 
 Examples:
-  make rpi4-upstream	# rpi4 official upstream image
-  make rpi4-minimal	# rpi4 minimal image
-  make rpi4-lxd		# rpi4 LXD appliance image
-
-Note: SSH keys inside of ./ssh_keys will be embedded into images when applicable
+  make rpi4-upstream SERVER=void@192.34.56.171
+  make rpi4-minimal SERVER=void@192.34.56.171
+  make rpi4-lxd SERVER=void@192.34.56.171 SSH_KEY=~/.ssh/id_ed25519.pub
 ```
